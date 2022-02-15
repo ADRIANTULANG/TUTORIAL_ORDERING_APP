@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 
 List<TemporyProductModel> temporaryModelFromJson(String str) =>
     List<TemporyProductModel>.from(
@@ -110,6 +111,7 @@ class Categoryproduct {
     required this.productimage,
     required this.productCategoryid,
     required this.productStoreId,
+    required this.quantity,
   });
 
   String productid;
@@ -118,9 +120,11 @@ class Categoryproduct {
   String productimage;
   String productCategoryid;
   String productStoreId;
+  RxInt quantity;
 
   factory Categoryproduct.fromJson(Map<String, dynamic> json) =>
       Categoryproduct(
+        quantity: 0.obs,
         productid: json["productid"],
         productname: json["productname"],
         productPrice: json["productPrice"],
@@ -130,6 +134,7 @@ class Categoryproduct {
       );
 
   Map<String, dynamic> toJson() => {
+        "quantity": quantity,
         "productid": productid,
         "productname": productname,
         "productPrice": productPrice,

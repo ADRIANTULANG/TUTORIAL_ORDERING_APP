@@ -14,7 +14,7 @@ class ProductController extends GetxController
   RxList<TemporyProductModel> temporaryList = <TemporyProductModel>[].obs;
   RxList<TemporyProductModel> temporaryMasterList = <TemporyProductModel>[].obs;
 
-  RxList<FinalProductModel> productList = <FinalProductModel>[].obs;
+  RxList<FinalProductModel> categoryList = <FinalProductModel>[].obs;
 
   TabController? tabController;
   RxBool isLoadingProducts = true.obs;
@@ -63,12 +63,22 @@ class ProductController extends GetxController
         }
       }
     }
-    productList.assignAll(finalProductModelFromJson(jsonEncode(list)));
+    categoryList.assignAll(finalProductModelFromJson(jsonEncode(list)));
 
-    tabController =
-        TabController(length: productList.length, vsync: this, initialIndex: 0);
+    tabController = TabController(
+        length: categoryList.length, vsync: this, initialIndex: 0);
     Timer(Duration(seconds: 1), () {
       isLoadingProducts(false);
     });
+  }
+
+  RxInt total_Quantity() {
+    var total = 0;
+    for (var i = 0; i < categoryList.length; i++) {
+      for (var z = 0; z < categoryList[i].categoryproducts.length; z++) {
+        total = total + categoryList[i].categoryproducts[z].quantity.value;
+      }
+    }
+    return total.obs;
   }
 }
