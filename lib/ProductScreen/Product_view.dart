@@ -1,3 +1,4 @@
+import 'package:flutterbasics/CartScreen/Cart_view.dart';
 import 'package:flutterbasics/ProductScreen/Product_Controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -255,7 +256,9 @@ class ProductView extends GetView<ProductController> {
                 child: FloatingActionButton(
                   backgroundColor: Colors.yellow[700],
                   child: Icon(Icons.shopping_cart_outlined),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => CartView());
+                  },
                 ),
               ),
       ),
